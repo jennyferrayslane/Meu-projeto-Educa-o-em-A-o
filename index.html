@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educação em Ação</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --vinho: #761d38;
+  --vinho-escuro: #501226;
+  --rosa-claro: #f8e9ed;
+  --creme: #fffaf5;
+  --dourado: #d7ad70;
+  --texto: #35272b;
+  --branco: #ffffff;
+  --borda: #ead8dd;
+  --sombra: 0 8px 25px rgba(80, 18, 38, 0.09);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--creme);
+  color: var(--texto);
+  line-height: 1.7;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 7%;
+  background: rgba(255, 250, 245, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  color: var(--vinho);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+}
+
+.logo span {
+  color: var(--dourado);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+nav a {
+  color: var(--vinho-escuro);
+  font-size: 0.89rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color .2s;
+}
+
+nav a:hover, nav a.ativo-nav {
+  color: var(--dourado);
+}
+
+.botao {
+  display: inline-block;
+  background: var(--vinho);
+  color: var(--branco);
+  border: 1px solid var(--vinho);
+  padding: 12px 23px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  transition: .2s;
+}
+
+.botao:hover {
+  background: var(--vinho-escuro);
+  transform: translateY(-1px);
+}
+
+.botao-dourado {
+  background: var(--dourado);
+  border-color: var(--dourado);
+  color: var(--vinho-escuro);
+}
+
+.botao-dourado:hover {
+  background: #c99b5a;
+}
+
+/* SISTEMA DE PÁGINAS (Telas isoladas) */
+.pagina {
+  display: none;
+  min-height: calc(100vh - 160px);
+  padding: 75px 7%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.pagina.ativa {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero {
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background:
+    linear-gradient(120deg, rgba(80,18,38,.96), rgba(118,29,56,.86)),
+    url("https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.hero-conteudo {
+  max-width: 850px;
+  padding: 40px 20px;
+}
+
+.hero-etiqueta {
+  display: inline-block;
+  border: 1px solid rgba(215,173,112,.8);
+  color: var(--dourado);
+  border-radius: 30px;
+  padding: 5px 16px;
+  font-size: .85rem;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 1.2;
+  margin-bottom: 22px;
+  font-weight: 700;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 28px;
+  color: #fff3f3;
+  font-size: 1.04rem;
+}
+
+.titulo-secao {
+  color: var(--vinho);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.subtitulo-secao {
+  max-width: 720px;
+  text-align: center;
+  margin: 0 auto 35px;
+  color: #79676d;
+}
+
+.grade-passos,
+.grade-empresas,
+.grade-oportunidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 23px;
+  margin-top: 35px;
+}
+
+.card {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: var(--sombra);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(80,18,38,.12);
+}
+
+.card h3 {
+  color: var(--vinho);
+  margin-bottom: 9px;
+  font-size: 1.1rem;
+}
+
+.card p {
+  color: #716168;
+  font-size: .93rem;
+}
+
+.icone-card {
+  font-size: 2.1rem;
+  margin-bottom: 12px;
+}
+
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 28px 0 35px;
+}
+
+.filtro {
+  border: 1px solid #d9bac4;
+  background: rgba(255,255,255,.8);
+  color: var(--vinho);
+  padding: 9px 17px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .2s;
+  font-size: .9rem;
+}
+
+.filtro:hover,
+.filtro.ativo {
+  background: var(--vinho);
+  color: white;
+  border-color: var(--vinho);
+}
+
+.empresa-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.empresa-card .botao {
+  width: 100%;
+  margin-top: auto;
+}
+
+.tag {
+  display: inline-block;
+  color: var(--vinho);
+  background: var(--rosa-claro);
+  border-radius: 30px;
+  padding: 4px 12px;
+  font-size: .78rem;
+  font-weight: 500;
+}
+
+.painel-escola {
+  max-width: 850px;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: var(--sombra);
+}
+
+.grupo-busca-escola {
+  position: relative;
+}
+
+.sugestoes-escola {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 0 0 9px 9px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 50;
+  box-shadow: var(--sombra);
+}
+
+.sugestao-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 0.91rem;
+  color: var(--texto);
+  border-bottom: 1px solid var(--rosa-claro);
+  transition: background .15s;
+}
+
+.sugestao-item:hover {
+  background: var(--rosa-claro);
+  color: var(--vinho);
+  font-weight: 500;
+}
+
+.tabela-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.93rem;
+}
+
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--borda);
+}
+
+th {
+  background: var(--rosa-claro);
+  color: var(--vinho);
+  font-weight: 600;
+}
+
+td {
+  color: var(--texto);
+}
+
+.desafio-conteudo {
+  max-width: 850px;
+  margin: 30px auto 0;
+}
+
+.bloco-desafio {
+  margin-bottom: 22px;
+}
+
+.bloco-desafio h3 {
+  color: var(--vinho);
+  margin-bottom: 8px;
+}
+
+.bloco-desafio ul {
+  padding-left: 24px;
+}
+
+.bloco-desafio li {
+  margin-bottom: 6px;
+}
+
+.formulario {
+  max-width: 650px;
+  margin: 28px auto 0;
+  padding: 30px;
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+}
+
+.formulario h3 {
+  color: var(--vinho);
+  margin-bottom: 8px;
+}
+
+.formulario-intro {
+  color: #79676d;
+  font-size: .92rem;
+  margin-bottom: 20px;
+}
+
+.formulario label {
+  display: block;
+  color: var(--vinho);
+  font-weight: 500;
+  font-size: .91rem;
+  margin: 16px 0 6px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #dfcbd1;
+  border-radius: 9px;
+  background: #fffdfb;
+  padding: 12px 14px;
+  outline: none;
+  color: var(--texto);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+  border-color: var(--vinho);
+  box-shadow: 0 0 0 3px rgba(118,29,56,.08);
+}
+
+.formulario textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.cadastro-opcoes {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.cadastro-opcao {
+  background: white;
+  border: 1px solid #d9bac4;
+  border-radius: 10px;
+  padding: 13px 22px;
+  color: var(--vinho);
+  cursor: pointer;
+  font-weight: 500;
+  transition: .2s;
+}
+
+.cadastro-opcao:hover,
+.cadastro-opcao.ativo {
+  background: var(--vinho);
+  border-color: var(--vinho);
+  color: white;
+}
+
+/* Estilos específicos para Suporte e Ajuda */
+.suporte-container {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.faq-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 45px;
+}
+
+.faq-item {
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--sombra);
+}
+
+.faq-item h4 {
+  color: var(--vinho);
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.faq-item p {
+  color: #716168;
+  font-size: .93rem;
+}
+
+.mensagem {
+  text-align: center;
+  margin-top: 16px;
+  font-size: .9rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.aviso {
+  max-width: 650px;
+  margin: 20px auto 0;
+  color: #79676d;
+  font-size: .82rem;
+  text-align: center;
+}
+
+.centralizar {
+  text-align: center;
+  margin-top: 25px;
+}
+
+footer {
+  background: var(--vinho-escuro);
+  color: white;
+  text-align: center;
+  padding: 35px 7%;
+}
+
+footer .logo {
+  color: white;
+  margin-bottom: 8px;
+}
+
+footer p {
+  color: #f1dfe5;
+  font-size: .88rem;
+  margin-top: 5px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  header {
+    justify-content: center;
+    text-align: center;
+    padding: 16px 5%;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 10px 14px;
+  }
+
+  nav a {
+    font-size: .82rem;
+  }
+
+  .pagina {
+    padding: 45px 5%;
+  }
+
+  .formulario {
+    padding: 22px;
+  }
+
+  .cadastro-opcao {
+    width: 100%;
+    max-width: 330px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo" data-pagina="inicio">Educação <span>em Ação</span></div>
+
+  <nav id="menuNavegacao">
+    <a data-pagina="inicio" class="ativo-nav">Início</a>
+    <a data-pagina="como-funciona">Como funciona</a>
+    <a data-pagina="contratacao">Contratação & Ganhos</a>
+    <a data-pagina="empresas">Empresas</a>
+    <a data-pagina="escola">Área da Escola</a>
+    <a data-pagina="cadastro">Cadastre-se</a>
+    <a data-pagina="suporte">Suporte & Ajuda</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- PÁGINA 1: INÍCIO -->
+  <section id="pagina-inicio" class="pagina ativa">
+    <div class="hero">
+      <div class="hero-conteudo">
+        <span class="hero-etiqueta">Educação • Talento • Oportunidade</span>
+        <h1>Transforme seu talento em oportunidades!</h1>
+        <p>
+          Conectamos estudantes a empresas por meio de desafios que desenvolvem
+          habilidades, incentivam a criatividade e aproximam os jovens do mercado de trabalho.
+        </p>
+        <button class="botao botao-dourado" onclick="mudarPagina('empresas')">Explorar desafios</button>
+        <button class="botao" style="margin-left:8px" onclick="mudarPagina('cadastro')">Fazer cadastro</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁGINA 2: COMO FUNCIONA -->
+  <section id="pagina-como-funciona" class="pagina">
+    <h2 class="titulo-secao">Como funciona?</h2>
+    <p class="subtitulo-secao">
+      Uma ponte entre a educação e o mundo profissional.
+    </p>
+
+    <div class="grade-passos">
+      <article class="card">
+        <div class="icone-card">🎓</div>
+        <h3>Cadastre-se</h3>
+        <p>Crie seu cadastro como estudante ou empresa para fazer parte do projeto.</p>
+      </article>
+
+      <article class="card">
+        <div class="icone-card">🏢</div>
+        <h3>Conheça as empresas</h3>
+        <p>Explore as organizações participantes e descubra os desafios disponíveis.</p>
+      </article>
+
+      <article class="card">
+        <div class="icone-card">💡</div>
+        <h3>Desenvolva soluções</h3>
+        <p>Use seus conhecimentos, criatividade e habilidades para resolver problemas.</p>
+      </article>
+
+      <article class="card">
+        <div class="icone-card">🚀</div>
+        <h3>Construa seu futuro</h3>
+        <p>Desenvolva seu portfólio e prepare-se para oportunidades profissionais.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PÁGINA 3: CONTRATAÇÃO & GANHOS -->
+  <section id="pagina-contratacao" class="pagina">
+    <h2 class="titulo-secao">Como você é contratado e ganha dinheiro?</h2>
+    <p class="subtitulo-secao">
+      Descubra como o seu esforço acadêmico e as soluções criadas se transformam em remuneração e vagas reais.
+    </p>
+
+    <div class="grade-oportunidades">
+      <article class="card">
+        <div class="icone-card">💰</div>
+        <h3>1. Premiação por Desafio</h3>
+        <p>As empresas parceiras avaliam as propostas enviadas. As ideias mais inovadoras e viáveis recebem prêmios em dinheiro ou vales-benefícios diretamente pelo projeto entregue.</p>
+      </article>
+
+      <article class="card">
+        <div class="icone-card">💼</div>
+        <h3>2. Bolsas de Estágio</h3>
+        <p>Estudantes que se destacam na resolução dos problemas são convidados diretamente pelas empresas para vagas de estágio remunerado, garantindo uma bolsa-auxílio mensal e experiência oficial.</p>
+      </article>
+
+      <article class="card">
+        <div class="icone-card">🤝</div>
+        <h3>3. Contratos Freelancer</h3>
+        <p>Para demandas pontuais, a empresa pode contratar o aluno como prestador de serviços (freelancer) para implementar o protótipo ou sistema na prática, com remuneração combinada por escopo.</p>
+      </article>
+
+      <article class="card">
+        <div class="icone-card">🌟</div>
+        <h3>4. Contratação Efetiva</h3>
+        <p>O projeto serve como um "portfólio ao vivo". Ao demonstrar comprometimento e competência técnica ou administrativa, o jovem constrói caminho direto para ser contratado pela empresa.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PÁGINA 4: EMPRESAS E DESAFIOS -->
+  <section id="pagina-empresas" class="pagina">
+    <h2 class="titulo-secao">Empresas e desafios</h2>
+    <p class="subtitulo-secao">
+      Escolha uma empresa, conheça seu desafio e apresente sua solução.
+    </p>
+
+    <div class="filtros" id="filtros">
+      <button class="filtro ativo" data-filtro="Todas">Todas</button>
+      <button class="filtro" data-filtro="Tecnologia">Tecnologia</button>
+      <button class="filtro" data-filtro="Design">Design</button>
+      <button class="filtro" data-filtro="Administração">Administração</button>
+      <button class="filtro" data-filtro="Marketing">Marketing</button>
+      <button class="filtro" data-filtro="Finanças">Finanças</button>
+      <button class="filtro" data-filtro="Sustentabilidade">Sustentabilidade</button>
+      <button class="filtro" data-filtro="Recursos Humanos">Recursos Humanos</button>
+    </div>
+
+    <div class="grade-empresas" id="listaEmpresas"></div>
+  </section>
+
+  <!-- PÁGINA DETALHE DE UM DESAFIO ESPECÍFICO -->
+  <section id="pagina-detalhe-desafio" class="pagina">
+    <h2 class="titulo-secao" id="tituloDesafio">Desafio da empresa</h2>
+    <p class="subtitulo-secao" id="descricaoDesafio"></p>
+
+    <div class="desafio-conteudo">
+      <article class="card">
+        <div class="bloco-desafio">
+          <h3>🎯 Sua missão</h3>
+          <p id="missaoDesafio"></p>
+        </div>
+
+        <div class="bloco-desafio">
+          <h3>📋 O que você precisa fazer</h3>
+          <ul id="tarefasDesafio"></ul>
+        </div>
+
+        <div class="bloco-desafio">
+          <h3>🧠 Habilidades desenvolvidas</h3>
+          <p id="habilidadesDesafio"></p>
+        </div>
+
+        <div class="bloco-desafio">
+          <h3>✨ Dica para resolver</h3>
+          <p id="dicaDesafio"></p>
+        </div>
+      </article>
+
+      <form class="formulario" id="formSolucao">
+        <h3>Envie sua solução</h3>
+        <p class="formulario-intro">
+          Apresente sua ideia para o desafio selecionado.
+        </p>
+
+        <label for="nomeSolucao">Nome completo</label>
+        <input id="nomeSolucao" name="nome" required placeholder="Seu nome">
+
+        <label for="emailSolucao">E-mail</label>
+        <input id="emailSolucao" name="email" type="email" required placeholder="seu@email.com">
+
+        <label for="solucao">Sua proposta de solução</label>
+        <textarea id="solucao" name="solucao" required placeholder="Explique sua ideia e como ela resolve o problema..."></textarea>
+
+        <label for="arquivoSolucao">Anexar arquivo (opcional)</label>
+        <input id="arquivoSolucao" name="arquivo" type="file">
+
+        <button class="botao" type="submit">Enviar solução</button>
+        <p class="mensagem" id="mensagemSolucao" role="status"></p>
+      </form>
+
+      <div class="centralizar">
+        <button class="botao" type="button" onclick="mudarPagina('empresas')">
+          ← Voltar para as empresas
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁGINA 5: ÁREA DA ESCOLA -->
+  <section id="pagina-escola" class="pagina">
+    <h2 class="titulo-secao">Área da Escola</h2>
+    <p class="subtitulo-secao">
+      Consulte quais alunos da sua instituição estão participando e enviando soluções.
+    </p>
+
+    <div class="painel-escola">
+      <form id="formLoginEscola">
+        <h3>Acesso institucional</h3>
+        <p class="formulario-intro">Digite ou busque o nome da sua escola para visualizar os alunos cadastrados.</p>
+        
+        <label for="buscaEscolaInput">Nome da Escola</label>
+        <div class="grupo-busca-escola">
+          <input id="buscaEscolaInput" type="text" autocomplete="off" required placeholder="Digite o nome da escola (Ex.: Escola Modelo)">
+          <div id="listaSugestoesEscola" class="sugestoes-escola" hidden></div>
+        </div>
+
+        <button class="botao" type="submit" style="width:100%; margin-top: 15px;">Acessar painel de alunos</button>
+      </form>
+
+      <div id="conteudoPainelEscola" hidden>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+          <h3 id="tituloPainelEscola" style="color: var(--vinho);">Alunos cadastrados</h3>
+          <button class="botao" type="button" id="sairPainelEscola" style="padding: 6px 14px; font-size: 0.85rem;">Sair</button>
+        </div>
+        
+        <div class="tabela-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome do Aluno</th>
+                <th>E-mail</th>
+                <th>Turma / Série</th>
+                <th>Área de Interesse</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaAlunosCorpo">
+              <!-- Os alunos cadastrados aparecerão aqui -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁGINA 6: CADASTRE-SE -->
+  <section id="pagina-cadastro" class="pagina">
+    <h2 class="titulo-secao">Faça parte do Educação em Ação</h2>
+    <p class="subtitulo-secao">
+      Cadastre-se para conectar talentos, conhecimentos e oportunidades.
+    </p>
+
+    <div class="cadastro-opcoes">
+      <button type="button" class="cadastro-opcao ativo" data-tipo="aluno">
+        🎓 Sou aluno
+      </button>
+
+      <button type="button" class="cadastro-opcao" data-tipo="empresa">
+        🏢 Sou empresa
+      </button>
+
+      <button type="button" class="cadastro-opcao" data-tipo="escola">
+        🏫 Sou escola
+      </button>
+    </div>
+
+    <form class="formulario" id="formCadastro">
+      <h3 id="tituloCadastro">Cadastro de aluno</h3>
+      <p class="formulario-intro" id="descricaoCadastro">
+        Preencha seus dados para participar dos desafios.
+      </p>
+
+      <label for="nomeCadastro" id="labelNome">Nome completo</label>
+      <input id="nomeCadastro" name="nome" required placeholder="Digite seu nome completo" autocomplete="name">
+
+      <label for="emailCadastro">E-mail</label>
+      <input id="emailCadastro" name="email" type="email" required placeholder="seu@email.com" autocomplete="email">
+
+      <div id="camposAluno">
+        <label for="escola">Nome da escola</label>
+        <input id="escola" name="escola" required placeholder="Nome da sua escola">
+
+        <label for="turma">Turma ou série</label>
+        <input id="turma" name="turma" required placeholder="Ex.: 3º ano do Ensino Médio">
+
+        <label for="areaInteresse">Área de interesse</label>
+        <select id="areaInteresse" name="area" required>
+          <option value="">Selecione uma área</option>
+          <option>Tecnologia</option>
+          <option>Design</option>
+          <option>Administração</option>
+          <option>Marketing</option>
+          <option>Finanças</option>
+          <option>Sustentabilidade</option>
+          <option>Recursos Humanos</option>
+          <option>Outra</option>
+        </select>
+      </div>
+
+      <div id="camposEmpresa" hidden>
+        <label for="nomeEmpresa">Nome da empresa</label>
+        <input id="nomeEmpresa" name="empresa" placeholder="Nome da organização">
+
+        <label for="cnpj">CNPJ (opcional no protótipo)</label>
+        <input id="cnpj" name="cnpj" placeholder="CNPJ da empresa">
+
+        <label for="representante">Nome do responsável</label>
+        <input id="representante" name="representante" placeholder="Nome do representante">
+
+        <label for="areaEmpresa">Área de atuação</label>
+        <select id="areaEmpresa" name="atuacao">
+          <option value="">Selecione uma área</option>
+          <option>Tecnologia</option>
+          <option>Design</option>
+          <option>Administração</option>
+          <option>Marketing</option>
+          <option>Finanças</option>
+          <option>Sustentabilidade</option>
+          <option>Recursos Humanos</option>
+          <option>Outra</option>
+        </select>
+
+        <label for="descricaoEmpresa">Sobre a empresa</label>
+        <textarea id="descricaoEmpresa" name="descricaoEmpresa" placeholder="Conte um pouco sobre a empresa e os desafios que gostaria de propor."></textarea>
+      </div>
+
+      <div id="camposEscola" hidden>
+        <label for="nomeEscolaCadastro">Nome da Instituição</label>
+        <input id="nomeEscolaCadastro" name="nomeEscola" placeholder="Nome da escola">
+
+        <label for="cidadeEscola">Cidade / Estado</label>
+        <input id="cidadeEscola" name="cidadeEscola" placeholder="Ex.: São Paulo - SP">
+
+        <label for="responsavelEscola">Coordenador(a) / Responsável</label>
+        <input id="responsavelEscola" name="responsavelEscola" placeholder="Nome do responsável">
+      </div>
+
+      <label for="senhaCadastro">Crie uma senha</label>
+      <input id="senhaCadastro" name="senha" type="password" minlength="8" required autocomplete="new-password" placeholder="Mínimo de 8 caracteres">
+
+      <button class="botao" type="submit">Criar cadastro</button>
+      <p class="mensagem" id="mensagemCadastro" role="status"></p>
+    </form>
+
+    <p class="aviso">
+      Este protótipo demonstra os formulários e a navegação. Os cadastros e as soluções ainda não são salvos em um banco de dados permanente.
+    </p>
+  </section>
+
+  <!-- PÁGINA 7: SUPORTE & CENTRAL DE AJUDA -->
+  <section id="pagina-suporte" class="pagina">
+    <h2 class="titulo-secao">Suporte & Central de Ajuda</h2>
+    <p class="subtitulo-secao">
+      Tire suas dúvidas nas perguntas frequentes ou entre em contato com nossa equipe em caso de complicações.
+    </p>
+
+    <div class="suporte-container">
+      <h3 style="color: var(--vinho); margin-bottom: 20px;">❓ Central de Ajuda (FAQ)</h3>
+      
+      <div class="faq-lista">
+        <article class="faq-item">
+          <h4>Como faço para enviar uma solução para um desafio?</h4>
+          <p>Vá até a aba "Empresas", escolha o desafio de sua preferência, clique em "Ver desafio" e preencha o formulário com a sua proposta de solução e arquivos opcionais.</p>
+        </article>
+
+        <article class="faq-item">
+          <h4>Minha escola não aparece na lista de busca. O que fazer?</h4>
+          <p>Certifique-se de que a escola foi cadastrada corretamente na aba "Cadastre-se" selecionando a opção "Sou escola". Caso já tenha feito, verifique se há erros de digitação na busca.</p>
+        </article>
+
+        <article class="faq-item">
+          <h4>Como sei se fui selecionado por uma empresa?</h4>
+          <p>As empresas parceiras entram em contato diretamente pelo e-mail cadastrado pelo aluno ou através da coordenação informada na Área da Escola.</p>
+        </article>
+
+        <article class="faq-item">
+          <h4>Posso participar de mais de um desafio?</h4>
+          <p>Sim! Os estudantes podem explorar e enviar propostas para quantos desafios desejarem, ampliando suas chances de portfólio e contratação.</p>
+        </article>
+      </div>
+
+      <form class="formulario" id="formSuporte" style="margin-top: 40px;">
+        <h3 style="color: var(--vinho);">📞 Contato com o Suporte</h3>
+        <p class="formulario-intro">
+          Teve algum problema técnico ou complicação? Envie uma mensagem para nossa equipe.
+        </p>
+
+        <label for="nomeSuporte">Seu nome</label>
+        <input id="nomeSuporte" name="nome" required placeholder="Digite seu nome">
+
+        <label for="emailSuporte">E-mail para contato</label>
+        <input id="emailSuporte" name="email" type="email" required placeholder="seu@email.com">
+
+        <label for="tipoProblema">Tipo de complicação</label>
+        <select id="tipoProblema" name="problema" required>
+          <option value="">Selecione o motivo</option>
+          <option>Problemas no cadastro de aluno/escola</option>
+          <option>Erro ao enviar solução de desafio</option>
+          <option>Dúvidas sobre premiações e estágios</option>
+          <option>Outro problema técnico</option>
+        </select>
+
+        <label for="mensagemSuporte">Descreva o ocorrido</label>
+        <textarea id="mensagemSuporte" name="mensagem" required placeholder="Explique detalhadamente o problema ou dúvida que você encontrou..."></textarea>
+
+        <button class="botao" type="submit">Enviar mensagem de suporte</button>
+        <p class="mensagem" id="mensagemSuporteStatus" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="logo" onclick="mudarPagina('inicio')">Educação <span>em Ação</span></div>
+  <p>Conectando educação, talentos e oportunidades.</p>
+  <p>© 2026 Educação em Ação. Projeto educacional.</p>
+</footer>
+
+<script>
+const empresas = [
+  {
+    nome: "CodeMaster Softwares",
+    categoria: "Tecnologia",
+    icone: "💻",
+    descricao: "Desenvolvimento de soluções e sistemas digitais.",
+    missao: "Criar uma proposta de aplicativo que facilite a organização dos estudos.",
+    tarefas: [
+      "Identifique uma dificuldade enfrentada pelos estudantes.",
+      "Proponha as principais funções do aplicativo.",
+      "Explique como ele funcionaria e ajudaria os usuários."
+    ],
+    habilidades: "Programação, lógica, criatividade e resolução de problemas.",
+    dica: "Pense em uma solução prática, intuitiva e acessível."
+  },
+  {
+    nome: "CyberGuard Sec",
+    categoria: "Tecnologia",
+    icone: "🔐",
+    descricao: "Soluções fictícias de segurança digital.",
+    missao: "Criar uma campanha educativa para ajudar estudantes a proteger suas contas na internet.",
+    tarefas: [
+      "Liste riscos comuns de segurança digital.",
+      "Proponha medidas de proteção.",
+      "Crie uma mensagem de conscientização."
+    ],
+    habilidades: "Segurança digital, pesquisa e comunicação.",
+    dica: "Explique a importância de senhas fortes e da verificação em duas etapas."
+  },
+  {
+    nome: "CloudScale Labs",
+    categoria: "Tecnologia",
+    icone: "☁️",
+    descricao: "Serviços fictícios de armazenamento em nuvem.",
+    missao: "Planejar um sistema de compartilhamento seguro de arquivos escolares.",
+    tarefas: [
+      "Explique como os arquivos seriam organizados.",
+      "Defina quem poderia acessar os documentos.",
+      "Apresente cuidados com a privacidade."
+    ],
+    habilidades: "Organização, tecnologia e segurança da informação.",
+    dica: "Considere diferentes permissões de acesso para cada usuário."
+  },
+  {
+    nome: "PixelArte Studio",
+    categoria: "Design",
+    icone: "🎨",
+    descricao: "Estúdio fictício de identidade visual.",
+    missao: "Criar o conceito de identidade visual para uma campanha de leitura.",
+    tarefas: [
+      "Escolha uma paleta de cores.",
+      "Defina fontes e elementos visuais.",
+      "Descreva como seria o cartaz da campanha."
+    ],
+    habilidades: "Design gráfico, criatividade e comunicação visual.",
+    dica: "Mantenha a identidade visual clara, atrativa e consistente."
+  },
+  {
+    nome: "FormaNova Design",
+    categoria: "Design",
+    icone: "✏️",
+    descricao: "Design de produtos e experiências.",
+    missao: "Propor uma embalagem sustentável para um produto de uso cotidiano.",
+    tarefas: [
+      "Escolha um produto.",
+      "Sugira materiais e formato da embalagem.",
+      "Explique como reduzir o desperdício."
+    ],
+    habilidades: "Design, inovação e sustentabilidade.",
+    dica: "Equilibre beleza, praticidade e responsabilidade ambiental."
+  },
+  {
+    nome: "LogiTech Brasil",
+    categoria: "Administração",
+    icone: "📦",
+    descricao: "Empresa fictícia de logística e organização.",
+    missao: "Propor melhorias no controle de estoque de uma pequena loja.",
+    tarefas: [
+      "Identifique problemas comuns de estoque.",
+      "Sugira uma forma de registrar entradas e saídas.",
+      "Explique como evitar desperdícios."
+    ],
+    habilidades: "Organização, planejamento e análise.",
+    dica: "Uma planilha bem organizada pode ser um bom ponto de partida."
+  },
+  {
+    nome: "Gestão Ágil Consultoria",
+    categoria: "Administração",
+    icone: "📊",
+    descricao: "Consultoria fictícia de gestão e produtividade.",
+    missao: "Criar um plano para melhorar a organização de tarefas de uma equipe.",
+    tarefas: [
+      "Identifique dificuldades de planejamento.",
+      "Proponha uma divisão de responsabilidades.",
+      "Explique como acompanhar o progresso."
+    ],
+    habilidades: "Liderança, planejamento e trabalho em equipe.",
+    dica: "Defina prioridades e responsabilidades de forma clara."
+  },
+  {
+    nome: "FinanTech Soluções",
+    categoria: "Finanças",
+    icone: "💳",
+    descricao: "Soluções financeiras inteligentes.",
+    missao: "Elaborar um guia prático de educação financeira para jovens.",
+    tarefas: [
+      "Defina conceitos básicos (poupança, planejamento, gastos).",
+      "Sugira uma regra simples de controle financeiro pessoal.",
+      "Apresente dicas de como evitar o endividamento."
+    ],
+    habilidades: "Educação financeira, planejamento e matemática aplicada.",
+    dica: "Mostre exemplos reais do dia a dia dos estudantes."
+  },
+  /* --- 4 NOVAS EMPRESAS ADICIONADAS --- */
+  {
+    nome: "InovaTech Soluções",
+    categoria: "Tecnologia",
+    icone: "⚡",
+    descricao: "Desenvolvimento de sistemas web e automação de processos.",
+    missao: "Desenvolver um protótipo de sistema em JavaScript ou Python para automatizar o cadastro de tarefas escolares.",
+    tarefas: [
+      "Definir as entradas e saídas de dados do sistema.",
+      "Criar um fluxo simples de validação de formulários.",
+      "Apresentar a interface ou o código básico da solução."
+    ],
+    habilidades: "Lógica de programação, HTML/CSS/JS e Python.",
+    dica: "Foque em criar um código limpo e funcional para resolver o problema."
+  },
+  {
+    nome: "VerdeVida Sustentabilidade",
+    categoria: "Sustentabilidade",
+    icone: "🌱",
+    descricao: "Projetos de impacto ambiental e gestão de resíduos.",
+    missao: "Criar um plano de ação para reduzir o desperdício de papel e energia no ambiente escolar.",
+    tarefas: [
+      "Mapear os principais pontos de consumo excessivo na escola.",
+      "Propor três medidas práticas e de baixo custo.",
+      "Desenvolver uma campanha de engajamento para os alunos."
+    ],
+    habilidades: "Consciência ambiental, planejamento e inovação verde.",
+    dica: "Pense em soluções que possam ser adotadas imediatamente pela comunidade escolar."
+  },
+  {
+    nome: "GlobalLog Administração & Finanças",
+    categoria: "Administração",
+    icone: "📈",
+    descricao: "Gestão administrativa, fluxo de caixa e processos organizacionais.",
+    missao: "Elaborar um modelo de fluxo de caixa simplificado para controlar o orçamento de um evento escolar.",
+    tarefas: [
+      "Listar custos fixos e variáveis de um evento.",
+      "Criar uma tabela de projeção de receitas e despesas.",
+      "Apresentar estratégias para otimizar os recursos financeiros."
+    ],
+    habilidades: "Administração, planilhas eletrônicas e finanças.",
+    dica: "Utilize uma estrutura de Balanced Scorecard ou planilha organizada para mostrar os resultados."
+  },
+  {
+    nome: "Nexus Gestão de Talentos",
+    categoria: "Recursos Humanos",
+    icone: "👥",
+    descricao: "Consultoria em desenvolvimento humano e recrutamento.",
+    missao: "Propor um programa de mentoria entre alunos veteranos e calouros.",
+    tarefas: [
+      "Definir os objetivos do programa de mentoria.",
+      "Criar critérios de seleção e acompanhamento dos participantes.",
+      "Desenvolver uma dinâmica de integração inicial."
+    ],
+    habilidades: "Comunicação interpessoal, empatia e gestão de pessoas.",
+    dica: "Valorize a troca de experiências e o suporte mútuo entre os estudantes."
+  }
+];
+
+let listaAlunosCadastrados = [
+  { nome: "Mariana Silva", email: "mariana@email.com", escola: "Escola Modelo", turma: "3º Ano A", area: "Tecnologia" },
+  { nome: "Lucas Oliveira", email: "lucas@email.com", escola: "Escola Modelo", turma: "2º Ano B", area: "Design" }
+];
+
+// GERENCIADOR DE TROCA DE PÁGINAS (SINGLE PAGE APP)
+function mudarPagina(nomePagina) {
+  document.querySelectorAll('.pagina').forEach(p => p.classList.remove('ativa'));
+  
+  const paginaAlvo = document.getElementById(`pagina-${nomePagina}`);
+  if (paginaAlvo) {
+    paginaAlvo.classList.add('ativa');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('#menuNavegacao a').forEach(a => {
+    if (a.dataset.pagina === nomePagina) {
+      a.classList.add('ativo-nav');
+    } else {
+      a.classList.remove('ativo-nav');
+    }
+  });
+}
+
+document.querySelectorAll('#menuNavegacao a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const pagina = e.target.dataset.pagina;
+    mudarPagina(pagina);
+  });
+});
+
+document.querySelectorAll('.logo').forEach(l => {
+  l.addEventListener('click', () => mudarPagina('inicio'));
+});
+
+// Renderizar empresas
+function renderizarEmpresas(filtro = "Todas") {
+  const container = document.getElementById('listaEmpresas');
+  container.innerHTML = "";
+
+  const filtradas = filtro === "Todas" 
+    ? empresas 
+    : empresas.filter(e => e.categoria === filtro);
+
+  filtradas.forEach((empresa, index) => {
+    const card = document.createElement('article');
+    card.className = 'card empresa-card';
+    card.innerHTML = `
+      <div class="icone-card">${empresa.icone}</div>
+      <span class="tag">${empresa.categoria}</span>
+      <h3>${empresa.nome}</h3>
+      <p>${empresa.descricao}</p>
+      <button class="botao" type="button" data-index="${empresas.indexOf(empresa)}">Ver desafio</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+document.getElementById('filtros').addEventListener('click', (e) => {
+  if (e.target.classList.contains('filtro')) {
+    document.querySelectorAll('.filtro').forEach(b => b.classList.remove('ativo'));
+    e.target.classList.add('ativo');
+    renderizarEmpresas(e.target.dataset.filtro);
+  }
+});
+
+document.getElementById('listaEmpresas').addEventListener('click', (e) => {
+  if (e.target.tagName === 'BUTTON') {
+    const index = e.target.dataset.index;
+    const empresa = empresas[index];
+
+    document.getElementById('tituloDesafio').textContent = empresa.nome;
+    document.getElementById('descricaoDesafio').textContent = empresa.descricao;
+    document.getElementById('missaoDesafio').textContent = empresa.missao;
+    
+    const ul = document.getElementById('tarefasDesafio');
+    ul.innerHTML = "";
+    empresa.tarefas.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t;
+      ul.appendChild(li);
+    });
+
+    document.getElementById('habilidadesDesafio').textContent = empresa.habilidades;
+    document.getElementById('dicaDesafio').textContent = empresa.dica;
+
+    mudarPagina('detalhe-desafio');
+  }
+});
+
+document.getElementById('formSolucao').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const msg = document.getElementById('mensagemSolucao');
+  msg.style.color = "var(--vinho)";
+  msg.textContent = "✅ Solução enviada com sucesso! Obrigado por participar.";
+  e.target.reset();
+});
+
+// ENVIO DE SUPORTE
+document.getElementById('formSuporte').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const msg = document.getElementById('mensagemSuporteStatus');
+  msg.style.color = "var(--vinho)";
+  msg.textContent = "✅ Mensagem enviada com sucesso! Nossa equipe entrará em contato em breve.";
+  e.target.reset();
+});
+
+// ALTERNAR ABAS DE CADASTRO
+const botoesCadastro = document.querySelectorAll('.cadastro-opcao');
+botoesCadastro.forEach(botao => {
+  botao.addEventListener('click', () => {
+    botoesCadastro.forEach(b => b.classList.remove('ativo'));
+    botao.classList.add('ativo');
+
+    const tipo = botao.dataset.tipo;
+    const camposAluno = document.getElementById('camposAluno');
+    const camposEmpresa = document.getElementById('camposEmpresa');
+    const camposEscola = document.getElementById('camposEscola');
+    const titulo = document.getElementById('tituloCadastro');
+    const desc = document.getElementById('descricaoCadastro');
+
+    camposAluno.hidden = true;
+    camposEmpresa.hidden = true;
+    camposEscola.hidden = true;
+
+    if (tipo === 'aluno') {
+      camposAluno.hidden = false;
+      titulo.textContent = "Cadastro de aluno";
+      desc.textContent = "Preencha seus dados para participar dos desafios.";
+    } else if (tipo === 'empresa') {
+      camposEmpresa.hidden = false;
+      titulo.textContent = "Cadastro de empresa";
+      desc.textContent = "Cadastre sua organização para propor desafios educacionais.";
+    } else if (tipo === 'escola') {
+      camposEscola.hidden = false;
+      titulo.textContent = "Cadastro de instituição de ensino";
+      desc.textContent = "Cadastre sua escola para acompanhar o progresso dos alunos.";
+    }
+  });
+});
+
+document.getElementById('formCadastro').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const msg = document.getElementById('mensagemCadastro');
+  const tipoAtivo = document.querySelector('.cadastro-opcao.ativo').dataset.tipo;
+
+  if (tipoAtivo === 'aluno') {
+    const nome = document.getElementById('nomeCadastro').value;
+    const email = document.getElementById('emailCadastro').value;
+    const escola = document.getElementById('escola').value.trim();
+    const turma = document.getElementById('turma').value;
+    const area = document.getElementById('areaInteresse').value;
+
+    listaAlunosCadastrados.push({ nome, email, escola, turma, area });
+    msg.style.color = "var(--vinho)";
+    msg.textContent = "🎓 Cadastro de aluno realizado com sucesso!";
+  } else if (tipoAtivo === 'empresa') {
+    msg.style.color = "var(--vinho)";
+    msg.textContent = "🏢 Empresa cadastrada com sucesso!";
+  } else if (tipoAtivo === 'escola') {
+    msg.style.color = "var(--vinho)";
+    msg.textContent = "🏫 Instituição cadastrada com sucesso!";
+  }
+
+  e.target.reset();
+});
+
+const inputBuscaEscola = document.getElementById('buscaEscolaInput');
+const listaSugestoes = document.getElementById('listaSugestoesEscola');
+
+inputBuscaEscola.addEventListener('input', () => {
+  const termo = inputBuscaEscola.value.trim().toLowerCase();
+  listaSugestoes.innerHTML = "";
+
+  if (termo === "") {
+    listaSugestoes.hidden = true;
+    return;
+  }
+
+  const escolasUnicas = [...new Set(listaAlunosCadastrados.map(a => a.escola))];
+  const filtradas = escolasUnicas.filter(esc => esc.toLowerCase().includes(termo));
+
+  if (filtradas.length > 0) {
+    filtradas.forEach(escolaNome => {
+      const div = document.createElement('div');
+      div.className = 'sugestao-item';
+      div.textContent = escolaNome;
+      div.addEventListener('click', () => {
+        inputBuscaEscola.value = escolaNome;
+        listaSugestoes.hidden = true;
+      });
+      listaSugestoes.appendChild(div);
+    });
+    listaSugestoes.hidden = false;
+  } else {
+    listaSugestoes.hidden = true;
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.grupo-busca-escola')) {
+    listaSugestoes.hidden = true;
+  }
+});
+
+document.getElementById('formLoginEscola').addEventListener('submit', (e) => {
+  e.preventDefault();
+  listaSugestoes.hidden = true;
+  const nomeEscolaDigitada = inputBuscaEscola.value.trim().toLowerCase();
+  
+  const alunosDaEscola = listaAlunosCadastrados.filter(a => a.escola.toLowerCase().includes(nomeEscolaDigitada));
+
+  const tbody = document.getElementById('tabelaAlunosCorpo');
+  tbody.innerHTML = "";
+
+  if (alunosDaEscola.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #79676d; padding: 20px;">Nenhum aluno encontrado para "${inputBuscaEscola.value}". Dica: tente "Escola Modelo"</td></tr>`;
+  } else {
+    alunosDaEscola.forEach(aluno => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${aluno.nome}</strong></td>
+        <td>${aluno.email}</td>
+        <td>${aluno.turma}</td>
+        <td><span class="tag">${aluno.area}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  document.getElementById('tituloPainelEscola').textContent = `Alunos de: ${inputBuscaEscola.value}`;
+  document.getElementById('formLoginEscola').hidden = true;
+  document.getElementById('conteudoPainelEscola').hidden = false;
+});
+
+document.getElementById('sairPainelEscola').addEventListener('click', () => {
+  document.getElementById('conteudoPainelEscola').hidden = true;
+  document.getElementById('formLoginEscola').hidden = false;
+  inputBuscaEscola.value = "";
+});
+
+renderizarEmpresas();
+</script>
+
+</body>
+</html>
+
+
+
